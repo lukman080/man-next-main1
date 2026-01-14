@@ -1,0 +1,279 @@
+/* =========================
+   THEME VARIABLES: Elegant Glass
+========================= */
+:root {
+  /* เน้นโทน Dark/Deep เป็นหลักเพื่อให้ Glass effect สวย */
+  --bg-color: #050511; 
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  
+  /* Gradient Colors */
+  --gradient-1: #4f46e5; /* Indigo */
+  --gradient-2: #ec4899; /* Pink */
+  
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  
+  --radius: 24px;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 32px 0 rgba(79, 70, 229, 0.25);
+}
+
+/* Light Mode Support (Glass on Light) */
+:root:not(.dark) {
+  --bg-color: #f3f4f6;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --panel: rgba(255, 255, 255, 0.6);
+  --panel-border: rgba(255, 255, 255, 0.4);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* =========================
+   BASE RESET
+========================= */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  
+  /* Ambient Background Light */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%);
+  background-attachment: fixed;
+  line-height: 1.6;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+h1, h2, h3 {
+  color: var(--text-main);
+  font-weight: 700;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  background: linear-gradient(to right, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+:root:not(.dark) h1 {
+  background: linear-gradient(to right, #1e1b4b, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+
+p { margin-bottom: 1.5rem; color: var(--text-muted); }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+/* =========================
+   LAYOUT COMPONENTS (Navbar)
+========================= */
+.site-header {
+  position: sticky;
+  top: 20px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  z-index: 100;
+  border-radius: 50px;
+  
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+:root:not(.dark) .site-header {
+   background: rgba(255, 255, 255, 0.7);
+}
+
+.nav {
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav .brand { font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; }
+
+.nav-links { display: flex; gap: 24px; }
+
+.nav-links a {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.nav-links a:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+:root:not(.dark) .nav-links a:hover { color: var(--gradient-1); text-shadow: none; }
+
+/* =========================
+   CARDS & CONTAINERS
+========================= */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--panel);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-hover);
+}
+
+:root:not(.dark) .card:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+  background-size: 200% 200%;
+  animation: gradientMove 5s ease infinite;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
+}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  box-shadow: none;
+  color: var(--text-main);
+  animation: none;
+}
+
+.btn.outline:hover {
+  background: var(--panel-border);
+  border-color: var(--text-main);
+}
+
+.btn.active {
+  background: white;
+  color: black;
+  animation: none;
+}
+
+/* =========================
+   FORMS
+========================= */
+form { width: 100%; }
+
+input, textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: rgba(0,0,0,0.2);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 1rem;
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
+  outline: none;
+}
+
+:root:not(.dark) input, :root:not(.dark) textarea { 
+  background: rgba(255,255,255,0.5); 
+  color: #000; 
+}
+
+input:focus, textarea:focus {
+  border-color: var(--gradient-1);
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.2);
+}
+
+.card:has(input, textarea) {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+img {
+  max-width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+small { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
