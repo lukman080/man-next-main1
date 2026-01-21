@@ -90,8 +90,8 @@ a {
 .site-header {
   position: sticky;
   top: 20px;
-  width: 90%;
-  max-width: 1000px;
+  width: 95%; /* ปรับให้กว้างขึ้น */
+  max-width: 1100px;
   margin: 0 auto;
   z-index: 100;
   border-radius: 50px;
@@ -110,24 +110,34 @@ a {
 .nav {
   padding: 0.8rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* จัดซ้ายขวา */
   align-items: center;
+  gap: 15px; /* ✅ เพิ่มระยะห่างระหว่าง Element หลัก */
 }
 
-.nav .brand { font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; }
-
-.nav-links { display: flex; gap: 24px; }
-
-.nav-links a {
-  opacity: 0.7;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
+/* ปรับแต่ง Logo */
+.nav .brand { 
+    font-size: 1.4rem; 
+    font-weight: 800; 
+    letter-spacing: 1px;
+    margin-right: 1.5rem; /* ✅ ดัน Logo ให้ห่างจากเมนู */
 }
 
-.nav-links a:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-:root:not(.dark) .nav-links a:hover { color: var(--gradient-1); text-shadow: none; }
+/* ปรับแต่งระยะห่างเมนู */
+.nav-link, .nav a:not(.brand):not(.btn) {
+    margin: 0 6px; /* ✅ ระยะห่างซ้ายขวาของแต่ละลิงก์ */
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.nav-link:hover, .nav a:not(.brand):not(.btn):hover {
+    color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* Spacer ดันเมนูขวา (ถ้าใช้) */
+.spacer { flex-grow: 1; }
 
 /* =========================
    CARDS & CONTAINERS
@@ -170,16 +180,17 @@ a {
 .card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
 
 /* =========================
-   BUTTONS
+   BUTTONS (แก้ไขให้สวยงาม)
 ========================= */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 2rem;
+  padding: 0.6rem 1.5rem; /* ปรับขนาดปุ่ม */
   border-radius: 50px;
   border: none;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
   color: white;
   background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
@@ -188,6 +199,7 @@ a {
   box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
   transition: 0.3s;
   text-decoration: none;
+  white-space: nowrap; /* ป้องกันข้อความตกบรรทัด */
 }
 
 @keyframes gradientMove {
@@ -201,6 +213,7 @@ a {
   box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
 }
 
+/* ปุ่มแบบมีขอบ (Outline) */
 .btn.outline {
   background: transparent;
   border: 1px solid var(--panel-border);
@@ -212,12 +225,6 @@ a {
 .btn.outline:hover {
   background: var(--panel-border);
   border-color: var(--text-main);
-}
-
-.btn.active {
-  background: white;
-  color: black;
-  animation: none;
 }
 
 /* =========================
@@ -255,12 +262,6 @@ input:focus, textarea:focus {
   margin: 0 auto;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
 /* =========================
    UTILITIES
 ========================= */
@@ -271,9 +272,15 @@ img {
 }
 
 small { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
+.error { color: #ef4444; margin-top: 8px; }
+.muted { color: #888988; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+
+/* ✅✅ ลบส่วนที่ซ้ำกันออกไปแล้ว ✅✅
+   (ไม่มี class .btn ขยะที่บรรทัดล่างสุดแล้ว)
+*/
